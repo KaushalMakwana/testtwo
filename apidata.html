@@ -1,0 +1,86 @@
+
+<head runat="server">
+    
+    <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btnUpload').click(function () {
+                var fileUpload = $("#FileUpload1").get(0);
+                var files = fileUpload.files;
+                var test = new FormData();
+                for (var i = 0; i < files.length; i++)
+                {
+                    test.append(files[i].name, files[i]);
+                }
+
+		test.append("cName","Raj2");
+		test.append("nAttributeSetId","Raj1");
+		
+		
+		test.append("cDescription","Raj3");
+		test.append("cShortDescription","Raj4");
+		test.append("cSKU","raj3");
+		
+		test.append("nWeight","Raj1");
+		test.append("fPrice","Raj2");
+
+		test.append("dtSpecialPriceFrom","Raj2");
+		test.append("dtSpecialPriceTo","Raj2");
+		test.append("dtSpecialPriceTo","Raj2");
+
+		test.append("nSpecialPrice","Raj3");
+		
+		test.append("nBaseCurrencyId","Raj4");
+		test.append("nLanguageId","raj3");
+		test.append("nMinimumStockAlert","Raj1");
+		
+		test.append("cWarrantyType","Raj2");
+		test.append("nWarrentyDuration","Raj3");
+		test.append("nWarrentyId","Raj4");
+		
+		test.append("nTaxId","Raj4");
+		test.append("dtNewProductFrom","Raj4");
+		test.append("dtNewProductTo","Raj4");		
+
+			
+                $.ajax({
+                    url: "http://www.vite.biz/fms/UploadHandler.ashx",
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: test,
+
+                   // dataType: "json",
+                    success: function (result) {
+                        // alert(result);
+
+			document.getElementById("txtkaushal").value = result;
+
+				
+			var data=result;
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+            });
+        })
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div align="center" style="margin-top:100px">
+
+    <input type="file" id="FileUpload1" />
+	
+    <input type="button" id="btnUpload" value="Upload Files"/>
+
+<input type="text" name="fname" id="txtkaushal" style="width:500px">
+        <br />
+
+        <input type="text" name="fname" id="Productname" style="width:500px">
+
+    </div>
+    </form>
+</body>
+</html>
